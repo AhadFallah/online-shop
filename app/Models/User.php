@@ -10,7 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +42,31 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'mobile_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function scopeFilter($query, $filters)
+    {
+        if(($isAdmin = $filters['is_admin'] ?? null) !== null && $filters['is_admin'] !== 'all') {
+            $query->where('is_admin', $isAdmin);
+        }
+
+        if(($isActive = $filters['is_active'] ?? null) !== null && $filters['is_active'] !== 'all') {
+            $query->where('is_active', $isActive);
+        }
+        if(($isStaff = $filters['is_staff'] ?? null) !== null && $filters['is_staff'] !== 'all') {
+            $query->where('is_staff', $isStaff);
+        }
+        if(($isSeller = $filters['is_seller'] ?? null) !== null && $filters['is_seller'] !== 'all') {
+            $query->where('is_seller', $isSeller);
+        }
+        if (($search = $filters['search'] ?? null) !== null) {
+            $query->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%');
+        }
+
+        return $query;
+
+    }
 }
