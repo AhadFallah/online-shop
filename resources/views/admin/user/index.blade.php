@@ -149,10 +149,6 @@
                 <div class="nk-tb-list is-separate mb-3">
                     <div class="nk-tb-item nk-tb-head">
                         <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid" />
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
                         </div>
                         <div class="nk-tb-col"><span class="sub-text">کاربر</span></div>
 
@@ -176,10 +172,6 @@
                     <!-- .nk-tb-item -->
                     <div class="nk-tb-item">
                         <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid10" />
-                                <label class="custom-control-label" for="uid10"></label>
-                            </div>
                         </div>
                         <div class="nk-tb-col">
                             <div class="user-card">
@@ -229,13 +221,13 @@
                                 <li class="nk-tb-action-hidden">
                                     @if($user->is_active)
                                     <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                        onclick="event.preventDefault();document.getElementById('sus').submit();"
+                                        onclick="event.preventDefault();document.getElementById('sus{{$user->id}}').submit();"
                                         data-bs-placement="top" title="تعلیق کردن">
                                         <em class="icon ni ni-user-cross-fill"></em>
                                     </a>
                                     @else
                                     <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                        onclick="event.preventDefault();document.getElementById('sus').submit();"
+                                        onclick="event.preventDefault();document.getElementById('sus{{$user->id}}').submit();"
                                         data-bs-placement="top" title="فعال کردن">
                                         <em class="icon ni ni-user-fill"></em>
                                     </a>
@@ -270,16 +262,17 @@
                                                 <li>
                                                     @if($user->is_active)
                                                     <a href="#"
-                                                        onclick="event.preventDefault();document.getElementById('sus').submit();"><em
+                                                        onclick="event.preventDefault();document.getElementById('sus{{$user->id}}').submit();"><em
                                                             class="icon ni ni-na"></em><span>تعلیق</span></a>
                                                     @else
                                                     <a href="#"
-                                                        onclick="event.preventDefault();document.getElementById('sus').submit();"><em
+                                                        onclick="event.preventDefault();document.getElementById('sus{{$user->id}}').submit();"><em
                                                             class="icon ni ni-check-circle-cut"></em><span>فعال
                                                             کردن</span></a>
 
                                                     @endif
-                                                    <form action="{{route('sus',$user)}}" id='sus' method="post">
+                                                    <form action="{{route('sus',$user)}}" id='sus{{$user->id}}'
+                                                        method="post">
                                                         @csrf
                                                         @method('patch')
                                                     </form>

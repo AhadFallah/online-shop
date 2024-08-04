@@ -76,7 +76,7 @@ class UserController extends Controller
     }
     public function suspension(User $user)
     {
-        if($user == auth()->user()) {
+        if($user->id == auth()->user()->id) {
             return to_route('users.index')->with('self_error', true);
         }
         if($user->is_active) {
