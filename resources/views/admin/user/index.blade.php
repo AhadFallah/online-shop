@@ -57,7 +57,8 @@
                                                                         <input type="radio" value="all"
                                                                             class="custom-control-input" id="is_seller3"
                                                                             name="is_seller"
-                                                                            @checked(request('is_seller')=='all' ) />
+                                                                            @checked(request('is_seller')=='all'
+                                                                            ||!request('is_seller') ) />
                                                                         <label class="custom-control-label"
                                                                             for="is_seller3">همه</label>
                                                                     </div>
@@ -68,7 +69,8 @@
                                                                         <input type="radio" value='all'
                                                                             class="custom-control-input" id="is_active3"
                                                                             name="is_active"
-                                                                            @checked(request('is_active')=='all' ) />
+                                                                            @checked(request('is_active')=='all' ||
+                                                                            !request('is_active')) />
                                                                         <label class="custom-control-label"
                                                                             for="is_active3">همه</label>
                                                                     </div>
@@ -102,7 +104,7 @@
                                                                         <input type="radio" value=0
                                                                             class="custom-control-input" id="is_seller2"
                                                                             name="is_seller"
-                                                                            @checked(request('is_seller')==0) />
+                                                                            @checked(request('is_seller')===0) />
                                                                         <label class="custom-control-label"
                                                                             for="is_seller2">کاربر</label>
                                                                     </div>
@@ -113,7 +115,7 @@
                                                                         <input type="radio" value=0
                                                                             class="custom-control-input" id="is_active2"
                                                                             name="is_active"
-                                                                            @checked(request('is_active')==0) />
+                                                                            @checked(request('is_active')===0) />
                                                                         <label class="custom-control-label"
                                                                             for="is_active2">غیر فعال</label>
                                                                     </div>
