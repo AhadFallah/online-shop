@@ -9,7 +9,7 @@
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">لیست کاربران</h3>
                             <div class="nk-block-des text-soft">
-                                <p>شما در مجموع {{$users->total()}} کاربر دارید.</p>
+                                <p>شما در مجموع {{ $users->total() }} کاربر دارید.</p>
                             </div>
                         </div>
                         <!-- .nk-block-head-content -->
@@ -25,7 +25,7 @@
                                                 <form action="" method="GET">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="default-04"
-                                                            name="search" placeholder="جستجوی بر اساس عنوان" />
+                                                            name="search" placeholder="جستجو در نام و ایمیل" />
                                                         <button type="submit" class="btn btn-primary"><em
                                                                 class="icon ni ni-search"></em> جستجو</button>
                                                     </div>
@@ -49,7 +49,7 @@
                                                     </div>
                                                     <div class="dropdown-body dropdown-body-rg">
 
-                                                        <form action="{{route('users.index')}}" method="get">
+                                                        <form action="{{ route('users.index') }}" method="get">
                                                             <div class="row gx-6 gy-3">
                                                                 <div class="col-6">
                                                                     <div
@@ -134,12 +134,6 @@
 
                                 </div>
                                 </li>
-                                <li class="nk-block-tools-opt">
-                                    <a href="#" class="btn btn-icon btn-primary d-md-none"><em
-                                            class="icon ni ni-plus"></em></a>
-                                    <a href="#" class="btn btn-primary d-none d-md-inline-flex"><em
-                                            class="icon ni ni-plus"></em><span>افزودن</span></a>
-                                </li>
                                 </ul>
                             </div>
                         </div>
@@ -176,7 +170,7 @@
                         </div>
                     </div>
 
-                    @foreach($users as $user)
+                    @foreach ($users as $user)
                     <!-- .nk-tb-item -->
                     <div class="nk-tb-item">
                         <div class="nk-tb-col nk-tb-col-check">
@@ -191,29 +185,28 @@
                                     <span>ص‌ض</span>
                                 </div>
                                 <div class="user-info">
-                                    <span class="tb-lead">{{$user->name}} <span
+                                    <span class="tb-lead">{{ $user->name }} <span
                                             class="dot dot-success d-md-none ms-1"></span></span>
-                                    <span>{{$user->email}}
+                                    <span>{{ $user->email }}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div class="nk-tb-col tb-col-md">
-                            <span>{{$user->mobile}}</span>
+                            <span>{{ $user->mobile }}</span>
                         </div>
                         <div class="nk-tb-col tb-col-lg">
                             <span>25 شهریور 1402</span>
                         </div>
                         <div class="nk-tb-col tb-col-md">
-                            @if($user->is_active)
+                            @if ($user->is_active)
                             <span class="tb-status text-success">فعال</span>
                             @else
-
                             <span class="tb-status text-danger">غیر فعال</span>
                             @endif
                         </div>
                         <div class="nk-tb-col tb-col-md">
-                            @if($user->is_admin)
+                            @if ($user->is_admin)
                             <span class="tb-status text-danger">ادمین</span>
                             @elseif($user->is_staff)
                             <span class="tb-status text-warning">کارمند</span>
@@ -232,10 +225,20 @@
                                     </a>
                                 </li>
                                 <li class="nk-tb-action-hidden">
+                                    @if($user->is_active)
                                     <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                        onclick="event.preventDefault();document.getElementById('sus').submit();"
                                         data-bs-placement="top" title="تعلیق کردن">
                                         <em class="icon ni ni-user-cross-fill"></em>
                                     </a>
+                                    @else
+                                    <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                        onclick="event.preventDefault();document.getElementById('sus').submit();"
+                                        data-bs-placement="top" title="فعال کردن">
+                                        <em class="icon ni ni-user-fill"></em>
+                                    </a>
+
+                                    @endif
                                 </li>
                                 <li>
                                     <div class="drodown">
@@ -263,7 +266,21 @@
                                                             عبور</span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><em class="icon ni ni-na"></em><span>تعلیق</span></a>
+                                                    @if($user->is_active)
+                                                    <a href="#"
+                                                        onclick="event.preventDefault();document.getElementById('sus').submit();"><em
+                                                            class="icon ni ni-na"></em><span>تعلیق</span></a>
+                                                    @else
+                                                    <a href="#"
+                                                        onclick="event.preventDefault();document.getElementById('sus').submit();"><em
+                                                            class="icon ni ni-check-circle-cut"></em><span>فعال
+                                                            کردن</span></a>
+
+                                                    @endif
+                                                    <form action="{{route('sus',$user)}}" id='sus' method="post">
+                                                        @csrf
+                                                        @method('patch')
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
@@ -315,8 +332,8 @@
                                     <select class="form-select js-select2" data-search="on" data-dropdown="xs center">
                                         <!-- Generate options -->
                                         @for ($i = 1; $i <= $users->lastPage(); $i++)
-                                            <option value="page-{{ $i }}" {{ $i==$users->currentPage() ? 'selected'
-                                                : '' }}>
+                                            <option value="page-{{ $i }}" {{ $i==$users->currentPage() ? 'selected' : ''
+                                                }}>
                                                 {{ $i }}</option>
                                             @endfor
                                     </select>
@@ -335,5 +352,22 @@
         </div>
     </div>
 </div>
+@if(session('self_error'))
+<div class="suspension_error">
+
 </div>
+@endif
+</div>
+
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        if ($('.suspension_error').length > 0) {
+            toastr.clear();
+            Swal.fire('اخطار', 'شما نمیتوانید خودتان را تعلیق کنید', 'error');
+
+        }
+    });
+</script>
 @endsection

@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('/users', UserController::class);
+Route::resource('/users', UserController::class)->parameters([
+    'users' => 'user:slug'
+]);
+Route::patch('/users/suspension/{user:slug}', [UserController::class,'suspension'])->name('sus');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
