@@ -86,4 +86,8 @@ class User extends Authenticatable
     {
         return 'slug';
     }
+    public function address()
+    {
+        return $this->hasMany(Address::class);
+    }
 }

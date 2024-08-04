@@ -241,7 +241,7 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <ul class="link-list-opt no-bdr">
                                                 <li>
-                                                    <a href="html/ecommerce/customer-details.html"><em
+                                                    <a href="{{route('users.show',$user)}}"><em
                                                             class="icon ni ni-eye"></em><span>مشاهده
                                                             مشخصات</span></a>
                                                 </li>

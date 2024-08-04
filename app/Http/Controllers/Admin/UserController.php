@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::latest();
+        $users = User::latest()->with('address');
         // if(!auth()->user()->is_admin) {
         //     $users = $users->where('is_admin', false);
         // }
@@ -46,9 +46,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        $user->created_at_p = englishToPersianWithTime($user->created_at);
+        return view('admin.user.show', compact('user'));
     }
 
     /**
