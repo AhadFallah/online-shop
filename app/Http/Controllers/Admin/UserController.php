@@ -49,7 +49,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->created_at_p = englishToPersianWithTime($user->created_at);
-        return view('admin.user.show', compact('user'));
+        $logins = $user->login()->orderBy('date', 'desc')->get();
+        $lastLogin = $logins->first();
+        $lastLogin = englishToPersianWithTime($lastLogin->date);
+        return view('admin.user.show', compact('user', 'lastLogin', 'logins'));
+
     }
 
     /**

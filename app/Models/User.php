@@ -90,4 +90,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
+    public function login()
+    {
+        return $this->hasMany(Login::class);
+    }
 }

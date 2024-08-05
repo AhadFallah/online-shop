@@ -175,8 +175,8 @@
                         </div>
                         <div class="nk-tb-col">
                             <div class="user-card">
-                                <div class="user-avatar bg-purple">
-                                    <span>ص‌ض</span>
+                                <div class="user-avatar base">
+                                    <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info">
                                     <span class="tb-lead">{{ $user->name }} <span
@@ -333,7 +333,7 @@
                                             @endfor
                                     </select>
                                 </div>
-                                <div>از {{ $users->total() }}</div>
+                                <div>از {{ $users->lastPage() }}</div>
                             </div>
                         </div>
                         <!-- .pagination-goto -->
