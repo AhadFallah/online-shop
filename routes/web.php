@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 Route::resource('/users', UserController::class)->parameters([
     'users' => 'user:slug'
 ]);
+Route::resource('/categories', CategoryController::class);
 Route::patch('/users/suspension/{user:slug}', [UserController::class,'suspension'])->name('sus');
 Route::get('/dashboard', function () {
     return view('dashboard');

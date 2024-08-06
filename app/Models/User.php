@@ -77,7 +77,7 @@ class User extends Authenticatable
     {
         return [
             'slug' => [
-                'source' => 'title',
+                'source' => 'name',
                 'onUpdate' => true
             ]
         ];
