@@ -34,7 +34,8 @@
                                         </li>
                                         <li>
                                             <div class="form-control-wrap">
-                                                <a class="btn btn-primary" href="{{route('categories.create')}}">افزودن
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('categories.create') }}">افزودن
                                                 </a>
                                             </div>
                                         </li>
@@ -92,26 +93,25 @@
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
                                                         <a
-                                                            href="{{route('categories.index',['category_id'=>$category->id])}}"><em
+                                                            href="{{ route('categories.index', ['category_id' => $category->id]) }}"><em
                                                                 class="icon ni ni-eye"></em><span>مشاهده
                                                                 زیرمجموعه ها</span></a>
                                                     </li>
                                                     <li>
-                                                        <a href="#"><em
-                                                                class="icon ni ni-repeat"></em><span>سفارشات</span></a>
+                                                        <a href="{{ route('categories.edit', $category) }}"><em
+                                                                class="icon ni ni-edit"></em><span>ویرایش</span></a>
                                                     </li>
                                                     <li>
-                                                        <a href="#"><em
-                                                                class="icon ni ni-activity-round"></em><span>فعالیت
-                                                                ها</span></a>
+                                                        <a href="#"
+                                                            onclick="event.preventDefault(); document.getElementById('delete').submit();"><em
+                                                                class="icon ni ni-trash"></em><span>حذف</span></a>
                                                     </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#"><em
-                                                                class="icon ni ni-shield-star"></em><span>بازنشانی
-                                                                رمز
-                                                                عبور</span></a>
-                                                    </li>
+                                                    <form id="delete" action="{{route('categories.destroy',$category)}}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+
+                                                    </form>
                                                 </ul>
                                             </div>
                                         </div>
