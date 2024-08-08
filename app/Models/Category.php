@@ -30,4 +30,41 @@ class Category extends Model
     {
         return 'slug';
     }
+    public function category()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function scopeFilter($query, $filter)
+    {
+        if(($search = $filter['search'] ?? null) != null) {
+            $query->where('name', 'like', '%'.$search.'%');
+
+        }
+        if(($category_id = $filter['category_id'] ?? null) != null) {
+
+            $query->where('category_id', $category_id);
+        }
+        return $query;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

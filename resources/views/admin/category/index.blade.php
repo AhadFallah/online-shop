@@ -25,7 +25,7 @@
                                                 <form action="" method="GET">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="default-04"
-                                                            name="search" placeholder="جستجو در نام و ایمیل" />
+                                                            name="search" placeholder="جستجو در عنوان" />
                                                         <button type="submit" class="btn btn-primary"><em
                                                                 class="icon ni ni-search"></em> جستجو</button>
                                                     </div>
@@ -52,8 +52,10 @@
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col nk-tb-col-check">
                             </div>
-                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">دسته‌بندی</span></div>
-                            <div class="nk-tb-col tb-col-md"><span class="sub-text">توضیحات</span></div>
+                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">دسته‌بندی</span></div>
+                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">توضیحات</span></div>
+
+                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">تعداد زیرمجموعه ها</span></div>
                             <div class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1 my-n1">
                                     <li>
@@ -71,11 +73,14 @@
                         <div class="nk-tb-item">
                             <div class="nk-tb-col nk-tb-col-check">
                             </div>
-                            <div class="nk-tb-col tb-col-xl">
+                            <div class="nk-tb-col tb-col-lg">
                                 {{ $category->name }}
                             </div>
-                            <div class="nk-tb-col tb-col-md">
+                            <div class="nk-tb-col tb-col-xl">
                                 {{ $category->description }}
+                            </div>
+                            <div class="nk-tb-col tb-col-lg">
+                                {{ $category->category()->count() }}
                             </div>
                             <div class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -86,8 +91,10 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href=""><em class="icon ni ni-eye"></em><span>مشاهده
-                                                                مشخصات</span></a>
+                                                        <a
+                                                            href="{{route('categories.index',['category_id'=>$category->id])}}"><em
+                                                                class="icon ni ni-eye"></em><span>مشاهده
+                                                                زیرمجموعه ها</span></a>
                                                     </li>
                                                     <li>
                                                         <a href="#"><em
@@ -111,6 +118,7 @@
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                         <!-- .nk-tb-item -->
                         @endforeach
