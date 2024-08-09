@@ -21,6 +21,7 @@ return new class () extends Migration {
             $table->tinyInteger("is_active")->default(1)->comment("0 inactive");
             $table->string('shaba');
             $table->string('card');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

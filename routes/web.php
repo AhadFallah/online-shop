@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,12 @@ Route::get('/', function () {
 Route::resource('/users', UserController::class)->parameters([
     'users' => 'user:slug'
 ]);
-Route::resource('/categories', CategoryController::class);
+Route::resource('/categories', CategoryController::class)->parameters([
+    'categories' => 'category:slug'
+]);
+Route::resource('/sellers', SellerController::class);
 Route::patch('/users/suspension/{user:slug}', [UserController::class,'suspension'])->name('sus');
+Route::patch('/sellers/suspension/{seller:slug}', [SellerController::class,'suspension'])->name('susSeller');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
