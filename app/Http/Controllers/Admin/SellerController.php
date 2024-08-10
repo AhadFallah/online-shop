@@ -52,7 +52,7 @@ class SellerController extends Controller
      */
     public function show(Seller $seller)
     {
-        return view('admin.seller.show');
+        return view('admin.seller.show', compact('seller'));
     }
 
     /**
