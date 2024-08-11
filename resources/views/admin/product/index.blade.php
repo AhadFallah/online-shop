@@ -29,11 +29,11 @@
                                                 </div>
                                             </li>
                                             <li class="nk-block-tools-opt">
-                                                <a href="#" data-target="addProduct"
-                                                    class="toggle btn btn-icon btn-primary d-md-none"><em
+                                                <a href="{{ route('products.create') }}"
+                                                    class=" btn btn-icon btn-primary d-md-none"><em
                                                         class="icon ni ni-plus"></em></a>
-                                                <a href="#" data-target="addProduct"
-                                                    class="toggle btn btn-primary d-none d-md-inline-flex"><em
+                                                <a href="{{ route('products.create') }}"
+                                                    class=" btn btn-primary d-none d-md-inline-flex"><em
                                                         class="icon ni ni-plus"></em><span>افزودن محصول</span></a>
                                             </li>
                                         </ul>
