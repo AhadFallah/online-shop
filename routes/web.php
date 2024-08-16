@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductSellerController;
+use App\Http\Controllers\Admin\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,10 @@ Route::get('/', function () {
 Route::resource('/users', UserController::class)->parameters([
     'users' => 'user:slug'
 ]);
+
+Route::post('/file/images/cover',[FileController::class,'cover']);
+Route::post('/file/images',[FileController::class,'pic']);
+
 Route::patch('/users/suspension/{user:slug}', [UserController::class,'suspension'])->name('sus');
 Route::resource('/categories', CategoryController::class)->parameters([
     'categories' => 'category:slug'
@@ -32,6 +38,7 @@ Route::resource('/sellers', SellerController::class);
 Route::patch('/sellers/suspension/{seller:slug}', [SellerController::class,'suspension'])->name('susSeller');
 
 Route::resource('/products', ProductController::class);
+Route::resource('seller/products', ProductSellerController::class)->name('index','sellerProducts');
 
 // Route::resource('/banks', BankController::class);
 

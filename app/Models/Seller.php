@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\User;
+use App\Models\Ptype;
 
 class Seller extends Model
 {
@@ -38,6 +39,10 @@ class Seller extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function ptypes()
+    {
+        return $this->belongsToMany(Ptype::class)->using('ptype_seller');
     }
 
 }

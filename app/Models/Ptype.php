@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Category;
+use App\Models\Seller;
 use Illuminate\Database\Eloquent\Model;
 
 class Ptype extends Model
@@ -27,5 +28,9 @@ class Ptype extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function sellers()
+    {
+        return $this->belongsToMany(Seller::class)->using('ptype_seller');
     }
 }
