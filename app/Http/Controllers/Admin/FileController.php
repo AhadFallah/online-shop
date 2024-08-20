@@ -16,7 +16,7 @@ class FileController extends Controller
         ]);
         $file = $validated['file'];
         $fileName = now() . '.' . $file->extension();
-        $path = Storage::putFileAs('image', $file, $fileName);
+        $path = Storage::putFileAs('public/image', $file, $fileName);
         $myFile= File::create([
             'name' => $fileName,
             'use' => 'product',
