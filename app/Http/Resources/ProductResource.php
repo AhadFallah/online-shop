@@ -14,7 +14,10 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+            $isAuthenticated = auth('sanctum')->check();
+
         return [
+            'id' => $this->id,
             'sellerName' => $this->seller->name,
             'category' => $this->ptype->category->name,
             'context' => $this->context,
@@ -25,7 +28,8 @@ class ProductResource extends JsonResource
             'commission' => $this->commission,
             'name' => $this->name,
             'description' => $this->description,
-'img'=>$this->file->where('type','cover')->first(),
+            'img' => $this->file->where('type', 'cover')->first(),
+            'bookmark'=>$isAuthenticated? auth('sanctum')->user()->bookmarks()->where('ptype_seller_id',$this->id,)->exists():false,
 
         ];
     }
