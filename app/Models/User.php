@@ -97,5 +97,8 @@ class User extends Authenticatable
     public function bookmarks(){
         return $this->hasMany(Bookmark::class);
     }
+    public function allBookmarks(){
+        return $this->belongsToMany(ptype_seller::class,'bookmarks','user_id','ptype_seller_id');
+    }
  
 }

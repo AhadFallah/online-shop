@@ -42,4 +42,22 @@ class HomeController extends Controller
             'products' => "success",
         ]);
     }
+    public function get_bookmarks(){
+        $user=auth('sanctum')->user();
+        $products=$user->allBookmarks()->paginate(9);
+        $products=ProductResource::collection($products);
+        return response()->json([
+            'products'=>PaginateResource::make($products),
+        ]);
+    }
+    public function newest(){
+        $products = ptype_seller::orderBy('id', 'desc')->paginate(9);
+        $hero = Hero::all();
+        $products = ProductResource::collection($products);
+        $hero = HeroResource::collection($hero);
+        return  response()->json([
+            'products' => PaginateResource::make($products),
+        ]);
+ 
+    }
 }
