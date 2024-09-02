@@ -100,5 +100,8 @@ class User extends Authenticatable
     public function allBookmarks(){
         return $this->belongsToMany(ptype_seller::class,'bookmarks','user_id','ptype_seller_id');
     }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
  
 }

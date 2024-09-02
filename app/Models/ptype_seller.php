@@ -19,7 +19,6 @@ class ptype_seller extends Pivot
         }
 
         return $query;
-
     }
     public function ptype()
     {
@@ -35,7 +34,10 @@ class ptype_seller extends Pivot
     }
     public function coverPic()
     {
-
         return $this->belongsToMany(File::class, 'file_ptype_seller', 'ptypeSellerId', 'file_id')->where('type', 'cover');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'ptype_seller_id', 'id');
     }
 }
