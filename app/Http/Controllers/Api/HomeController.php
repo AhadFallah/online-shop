@@ -26,7 +26,7 @@ class HomeController extends Controller
     }
     public function bookmark(Request $request)
     {
-        $productId=$request->product;
+        $productId = $request->product;
         $user = Auth::user();
 
         $bookmark = $user->bookmarks->where('ptype_seller_id', $productId)->first();
@@ -42,15 +42,17 @@ class HomeController extends Controller
             'products' => "success",
         ]);
     }
-    public function get_bookmarks(){
-        $user=auth('sanctum')->user();
-        $products=$user->allBookmarks()->paginate(9);
-        $products=ProductResource::collection($products);
+    public function get_bookmarks()
+    {
+        $user = auth('sanctum')->user();
+        $products = $user->allBookmarks()->paginate(9);
+        $products = ProductResource::collection($products);
         return response()->json([
-            'products'=>PaginateResource::make($products),
+            'products' => PaginateResource::make($products),
         ]);
     }
-    public function newest(){
+    public function newest()
+    {
         $products = ptype_seller::orderBy('id', 'desc')->paginate(9);
         $hero = Hero::all();
         $products = ProductResource::collection($products);
@@ -58,6 +60,6 @@ class HomeController extends Controller
         return  response()->json([
             'products' => PaginateResource::make($products),
         ]);
- 
+
     }
 }

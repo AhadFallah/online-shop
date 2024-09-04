@@ -3,8 +3,10 @@
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\UserAuthController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +20,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  return $request->user();
+    return $request->user();
 });
 Route::middleware(['auth:sanctum'])->group(function () {
 
-  Route::post('/bookmark', [HomeController::class, 'bookmark']);
-  Route::post('/comment', [CommentController::class, 'store']);
-  Route::get('/allBookmarks', [HomeController::class, 'get_bookmarks']);
+    Route::post('/bookmark', [HomeController::class, 'bookmark']);
+    Route::post('/comment', [CommentController::class, 'store']);
+    Route::get('/allBookmarks', [HomeController::class, 'get_bookmarks']);
 });
 Route::get('/home', [HomeController::class, 'home']);
 Route::get('/new', [HomeController::class, 'newest']);
+Route::get('/search', [SearchController::class,'search']);
+Route::get('/categories', [CategoryController::class,'get']);
+Route::get('/category', [CategoryController::class,'get_products']);
 
 Route::post('register', [UserAuthController::class, 'register']);
 Route::post('login', [UserAuthController::class, 'login']);
