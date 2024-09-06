@@ -94,14 +94,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Login::class);
     }
-    public function bookmarks(){
+    public function bookmarks()
+    {
         return $this->hasMany(Bookmark::class);
     }
-    public function allBookmarks(){
-        return $this->belongsToMany(ptype_seller::class,'bookmarks','user_id','ptype_seller_id');
+    public function allBookmarks()
+    {
+        return $this->belongsToMany(ptype_seller::class, 'bookmarks', 'user_id', 'ptype_seller_id');
     }
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
- 
+
 }
