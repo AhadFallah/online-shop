@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mobile')->unique()->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
+            $table->forgindId('address_id')->constrained('addresses');
             $table->tinyInteger('is_admin')->default(0);
             $table->tinyInteger('is_staff')->default(0);
             $table->tinyInteger('is_seller')->default(0);

@@ -40,4 +40,8 @@ class ptype_seller extends Pivot
     {
         return $this->hasMany(Comment::class, 'ptype_seller_id', 'id');
     }
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, "ptype_seller_discount", "ptype_seller_id", 'discount_id');
+    }
 }
