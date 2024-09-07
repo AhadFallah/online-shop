@@ -27,8 +27,8 @@ Route::resource('/users', UserController::class)->parameters([
     'users' => 'user:slug'
 ]);
 
-Route::post('/file/images/cover',[FileController::class,'cover']);
-Route::post('/file/images',[FileController::class,'pic']);
+Route::post('/file/images/cover', [FileController::class,'cover']);
+Route::post('/file/images', [FileController::class,'pic']);
 
 Route::patch('/users/suspension/{user:slug}', [UserController::class,'suspension'])->name('sus');
 Route::resource('/categories', CategoryController::class)->parameters([
@@ -37,8 +37,8 @@ Route::resource('/categories', CategoryController::class)->parameters([
 Route::resource('/sellers', SellerController::class);
 Route::patch('/sellers/suspension/{seller:slug}', [SellerController::class,'suspension'])->name('susSeller');
 
-Route::resource('/products', ProductController::class);
-Route::resource('seller/products', ProductSellerController::class)->name('index','sellerProducts');
+Route::resource('/products', ProductController::class)->name("create", "productss.create");
+Route::resource('seller/products', ProductSellerController::class)->name('index', 'sellerProducts');
 
 // Route::resource('/banks', BankController::class);
 

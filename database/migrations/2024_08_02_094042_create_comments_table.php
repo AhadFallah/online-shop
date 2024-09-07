@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->foreignId('ptype_seller_id')->constrained('ptype_seller');
             $table->text('comment');
             $table->integer('suggest')->default(2)->comment('[1=good,2=NHO,3=bad]');
+            $table->boolean('is_approved')->default(0);
             $table->timestamps();
         });
     }
