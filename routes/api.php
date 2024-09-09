@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/bookmark', [HomeController::class, 'bookmark']);
     Route::post('/comment', [CommentController::class, 'store']);
     Route::get('/allBookmarks', [HomeController::class, 'get_bookmarks']);
+    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::post('/profile/update', [ProfileController::class, 'update']);
 });
+
 Route::get('/home', [HomeController::class, 'home']);
 Route::get('/new', [HomeController::class, 'newest']);
 Route::get('/search', [SearchController::class,'search']);

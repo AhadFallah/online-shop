@@ -31,26 +31,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="default-07">زیرمجموعه</label>
-                                            <div class="form-control-wrap">
-                                                <select class="form-select js-select2" id="default-07" data-search="on"
-                                                    name="category_id" aria-label="مثال انتخاب چندتایی">
 
-                                                    <option value="0">بدون انتخاب</option>
-                                                    @foreach ($categories as $subCategory)
-                                                        <option value="{{ $subCategory->id }}" @selected($subCategory->id == $category->category_id)>
-                                                            {{ $subCategory->name }}</option>
-                                                    @endforeach
-
-                                                </select>
-
-                                                <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="col-sm-12">
